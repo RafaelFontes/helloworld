@@ -233,3 +233,83 @@ this.element.onclick = () => {
 ```
 
 Just like that.
+
+
+### Extended Parameter Handling
+
+Every now and then we like to use the special variable inside functions named `arguments`.
+
+It contains an object containing all the parameters used to call the function.
+
+And looks like some people was not liking this approach and decided to remove it from the arrow functions.
+
+Yes, there's no arguments inside an arrow function. If you try to use it, you will even get an exception thrown.
+
+#### What now?
+
+Well... Now, you can actually name your special arguments variable, and even make it better, using the **Rest Parameter**.
+
+```
+let sumAll = (...args) => {
+    return args.reduce( (prev, current) => 
+        { 
+            return prev + current; 
+        } 
+    );
+}
+```
+
+As I understand the `reduce` function is not well known, I will place a link to the 2011's specification of Ecma about it.
+
+[Array.prototype.reduce(callbackfn[,initialValue])](http://www.ecma-international.org/ecma-262/5.1/#sec-15.4.4.21)
+
+You can specify the `Rest Parameter` even after other parameters.
+
+```
+let putOrTake = ( type, ... what ) =>
+{
+    return what.reduce( (prev, curr) => 
+    {
+        return (type == "put") ? prev + curr : prev - curr;
+    });
+}
+```
+
+You just need to be aware that a Rest Parameter must be the last of a function.
+
+#### Spread Operator
+
+This one is kind of hard to figure out, but it is such a usefull thing to have.
+
+Anytime you need to spread a iterable collection with JavaScript was such a pain... but now we have this thing called `Spread Operator` that makes it very easy for us to make this kind of job.
+
+Let me show you a simple example:
+
+```
+var str = "foo";
+console.log( str.split("") ); // [ "f", "o", "o" ]
+```
+becomes
+```
+var str = "foo";
+console.log( [...foo] ); // [ "f", "o", "o" ]
+```
+
+Or just even to concat arrays...
+
+```
+var params = [ 1, 2, "name" ];
+var params2 = [ 4, 5, "other" ];
+
+console.log( params.concat( params2 ) ) // [1, 2, "name", 4, 5, "other"]
+```
+
+becomes
+
+```
+var params = [ 1, 2, "name" ];
+var params2 = [ 4, 5, "other" ];
+
+console.log( [...params, ...params2] ) // [1, 2, "name", 4, 5, "other"]
+```
+

@@ -443,12 +443,12 @@ now:
 ```
 rect = {
     x : 10,
-    y : 10,
+    y : 20,
     w : 100,
-    h : 100
+    h : 200
 }
 
-var { x, y, w, h } = rect;
+var { x, w } = rect;
 
 console.log( `Rightmost x position: ${x+w}` );
 ```

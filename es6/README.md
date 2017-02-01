@@ -345,4 +345,110 @@ how is your day?`);
 
 > Do I even have to say anything?
 
+## Assignments and Object Creation
 
+* Property Shorthand
+
+before:
+
+```
+var x = 10;
+var y = 15;
+
+obj = { "x" : x, "y" : y };
+```
+
+now:
+
+```
+var x = 10;
+var y = 15;
+
+obj = { x, y }
+```
+
+Basically if the name of an attribute of the object is identical of the name of the variable, you can just place the variable and everything will be ok.
+
+* Computed Property Names
+
+before:
+
+```
+var dynamicPropName = "Index";
+var dynamicPropValue = "booya";
+
+var router = {
+    "foo" : "bar"
+};
+
+router["page" + dynamicPropName] = dynamicPropValue;
+
+console.log( router["page" + dynamicPropName] );
+```
+
+now:
+```
+var dynamicPropName = "Index";
+var dynamicPropValue = "booya";
+
+var router = {
+    "foo" : "bar",
+    [`page${dynamicPropName}`] : dynamicPropValue
+};
+console.log( router[`page${dynamicPropName}`] );
+```
+
+* Method properties
+
+before:
+
+```
+obj = {
+    foo : function (param)
+    {
+        return "bar" + param;
+    }
+}
+console.log(obj.foo("man"));
+```
+now:
+
+```
+obj = {
+    foo (param)
+    {
+        return "bar" + param;
+    }
+}
+console.log(obj.foo("man"));
+```
+
+* Object Variable Matching
+
+before:
+
+```
+rect = {
+    x : 10,
+    y : 10,
+    w : 100,
+    h : 100
+}
+
+console.log( "Rightmost x position:" + (rect.x + rect.w)  );
+```
+
+now:
+
+```
+rect = {
+    x : 10,
+    y : 10,
+    w : 100,
+    h : 100
+}
+
+var { x, y, w, h } = rect;
+
+console.log( `Rightmost x position: ${x+w}` );
+```

@@ -292,7 +292,7 @@ console.log( str.split("") ); // [ "f", "o", "o" ]
 becomes
 ```
 var str = "foo";
-console.log( [...foo] ); // [ "f", "o", "o" ]
+console.log( [...str] ); // [ "f", "o", "o" ]
 ```
 
 Or just even to concat arrays...

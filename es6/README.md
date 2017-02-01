@@ -313,3 +313,36 @@ var params2 = [ 4, 5, "other" ];
 console.log( [...params, ...params2] ) // [1, 2, "name", 4, 5, "other"]
 ```
 
+## String Interpolation
+
+This one came to give us quality of life... so good!
+
+Every time we need to format a string with several parameters just to display a message to the user is such an ugly messy peace of code... 
+
+Something like:
+
+```
+var userData = { name: "Mary", gender : "F" };
+var greetings = { "F" : "Ms.", "M" : "Mr." }; 
+
+console.log( "Hello " + greetings[userData.gender] + " " + 
+        userData.name + ",\n" +
+        "how is your day?" );
+```
+
+> Just... blergh...
+
+And now ...
+
+```
+var userData = { name: "John", gender : "M" };
+var greetings = { "F" : "Ms.", "M" : "Mr." }; 
+
+console.log(
+`Hello ${greetings[userData.gender]},
+how is your day?`);
+```
+
+> Do I even have to say anything?
+
+

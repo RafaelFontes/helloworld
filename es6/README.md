@@ -7,7 +7,7 @@ As of 02/01/2017, browser support for EcmaScript 6, officially known as ECMAScri
 I will try to concentrate here most of the features I have to know to understand upcoming libraries, modules and frameworks. 
 
 
-> Scoped variable
+## Scoped variable
 
 We tend to understand that when a variable is created in JavaScript, it will last forever
 ```
@@ -42,7 +42,7 @@ for( var i = 0; i < list.length; ++i )
             }, 
             i * 1000
         );
-    })(i);
+    })( i );
 }
 ```
 That way, the value of _i_ on the anonymous function comes from the parameter of his parent function instead of the one declared on the _for loop_.
@@ -59,7 +59,7 @@ var list = [ 0, 1, 2 ];
 for( let i = 0; i < list.length; ++i )
 {
     setTimeout( 
-        function(){ 
+        function() { 
             console.log( i, list[i] );
         }, 
         i * 1000
@@ -68,3 +68,96 @@ for( let i = 0; i < list.length; ++i )
 ```
 Better, right?
 
+## Arrow function () => 
+
+At first, it's just another way to express a function
+
+
+#### Structure:
+
+> parameters => body
+
+arrow function with a single parameter doesn't need to be around brackets
+```
+x => 
+```
+
+with more than one parameter would be
+
+```
+( x, y ) => 
+```
+
+arrow function with just a return value, the body doesn't need to be around brackets and there's no need for the return statement.
+
+```
+x => x
+```
+
+the last statement would be _translated_ to 
+
+```
+function ( x ) {
+    return x;
+}
+```
+
+if you need more than an expression on your body, you need to surround it with brackets and place a return function, if needed.
+
+```
+ x => { 
+     if ( x > 0 ) {
+        x += 2;
+     }
+     return x * x; 
+}
+
+``` 
+the last statement would be _translated_ to 
+
+```
+function ( x ) {
+    if ( x > 0 ) {
+        x += 2;
+    }
+
+    return x * x;
+}
+```
+
+Before es6:
+
+```
+function sum ( a, b )
+{
+    return a + b;
+} 
+
+function square( x )
+{
+    return x * x;
+}
+
+function pythagoras( cat1, cat2 )
+{
+    var a = square( cat1 );
+    var b = square( cat2 );
+
+    return Math.sqrt( sum( a, b ) );
+}
+```
+
+After es6:
+
+```
+sum = ( a, b ) => a + b;
+
+square = x => x * x;
+
+pythagoras = ( cat1, cat2 ) => {
+    let a = square( cat1 );
+    let b = square( cat2 );
+
+    return Math.sqrt( sum( a,b ) );
+}
+``` 

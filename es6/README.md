@@ -452,3 +452,96 @@ var { x, w } = rect;
 
 console.log( `Rightmost x position: ${x+w}` );
 ```
+
+
+## Promises
+
+Promises finally became available natively. 
+
+The purpose is to retrieve a object or just execute something after an async call.
+
+> How we did it before:
+
+```
+function sendMessageAfterTimeout ( msg, who, timeout, onDone, onFail )
+{
+    if ( !msg ) 
+    {
+        onFail("Message can't be empty");
+        return;
+    }
+
+    setTimeout( function(){
+        onDone( msg + " to " + who + "!");
+    }, timeout );
+}
+
+sendMessageAfterTimeout( "Hello", "Rafael", 1000, function(message){
+    console.log("messageSent: " + message);
+}, function(error)
+{
+    console.log("Error: " + error);
+});
+```
+
+And how we do it now:
+
+```
+sendMessageAfterTimeout = ( msg, who, timeout ) =>
+{
+    return new Promise( (resolve,reject) => {
+
+        if ( !msg ) reject("Message can't be empty");
+        else
+        {
+            setTimeout( () => {
+                resolve( `${msg} to ${who}!` );
+            }, timeout );
+        }
+    });
+}
+
+sendMessageAfterTimeout( "Hello", "Rafael", 1000 ).then( (message)=>{
+    console.log(`messageSent: ${message}`);
+}).catch( (error) => { console.log(`Error:  ${error}` ) } );
+```
+
+Also we can combine several promises and wait until everysingle one is finished.
+
+```
+sendMessageAfterTimeout = ( msg, who, timeout ) =>
+{
+    return new Promise( (resolve,reject) => {
+
+        if ( !msg ) reject("Message can't be empty");
+        else
+        {
+            setTimeout( () => {
+                resolve( `${msg} to ${who}!` );
+            }, timeout );
+        }
+    });
+}
+
+Promise.all([
+    sendMessageAfterTimeout("Hello", "Fallen", 1000 ),
+    sendMessageAfterTimeout("Hello", "TACO", 2000 ),
+    sendMessageAfterTimeout("Hello", "Fer", 3000 )
+]).then( (messages) => {
+    console.log("Messages sent:\n"); 
+    messages.forEach( message => {
+        console.log( message );
+    });
+ })
+```
+
+> output after 3 seconds delay: 
+```
+Messages sent:
+
+Hello to Fallen!
+
+Hello to TACO!
+
+Hello to Fer!
+```

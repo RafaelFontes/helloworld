@@ -14,6 +14,15 @@ I will try to put in here everything that I, and/or hopefully more people, endup
 > [Modular Javascript](https://www.youtube.com/playlist?list=PLoYCgNOIyGABs-wDaaxChu82q_xQgUb4f)
 - - -
 
+* **JavaScript - ES6** - What's all that new stuff with JavaScript - EcmaScript 6
+
+> [***Hello World***](https://github.com/poste9/helloworld/blob/master/es6)
+
+> [Feature List](http://es6-features.org)
+
+- - -
+
+
 * **NPM** - JavaScript Package Manager 
 
 > [***Hello World***](https://github.com/poste9/helloworld/blob/master/nodejs)

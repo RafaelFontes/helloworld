@@ -161,3 +161,75 @@ pythagoras = ( cat1, cat2 ) => {
     return Math.sqrt( sum( a,b ) );
 }
 ``` 
+
+And now, my favorite change...
+
+### Lexical this
+
+Every experienced JavaScript programmer had to deal with the fact that this is not always what you think it is.
+
+Let me show you an example.
+
+```
+function MyButton()
+{
+    this.render = function() {
+        this.tooltip = "Just Click The Button";
+
+        this.element = document.createElement( "button" );
+        this.element.innerText = "Click me";
+
+        this.element.onclick = function() {
+            console.log( this.tooltip );
+        }
+
+        document.body.appendChild( this.element );
+    }
+
+    return this;
+}
+
+var button = new MyButton();
+    button.render();
+```
+
+This peace of code will add a button to a body of a html document.
+
+The button element created will wait for a click event to trigger and will log to the console `this.tooltip`
+
+The problem is... we get `undefined` logged. Why?
+
+Well.. when the function assigned to the event onclick of the element is called, the variable `this`, is pointing to the element that triggered the event. 
+
+And obviously it **was not** our `MyButton` instance, it was the `HTMLButtonElement` itself. 
+
+
+We usually resolve this issue saving what we need to a variable, like so:
+
+```
+var _this = this;
+this.element.onclick = function() {
+    console.log( _this.tooltip );
+}
+```
+
+Another way would be to bind the function, like so:
+
+```
+this.element.onclick = function() {
+    console.log( _this.tooltip );
+}.bind( this );
+```
+_A bit weird for beginners I think. Anyway...._ 
+
+ES6 brought to us another way to solve this with arrow functions.
+
+The same block of code could look like:
+
+```
+this.element.onclick = () => { 
+    console.log( this.tooltip ) 
+}
+```
+
+Just like that.

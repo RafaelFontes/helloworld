@@ -536,6 +536,7 @@ Promise.all([
 ```
 
 > output after 3 seconds delay: 
+
 ```
 Messages sent:
 

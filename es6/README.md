@@ -166,7 +166,7 @@ And now, my favorite change...
 
 ### Lexical this
 
-Every experienced JavaScript programmer had to deal with the fact that this is not always what you think it is.
+Every experienced JavaScript programmer had to deal with the fact that `this` is not always what you think it is.
 
 Let me show you an example.
 

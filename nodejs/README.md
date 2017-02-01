@@ -58,7 +58,7 @@ example of a package.json file:
 
 ## How to start a project with npm?
 
-![npm-init.gif](C:/dev/github/helloworld/recs/npm-init.gif)
+![npm-init.gif](https://github.com/poste9/helloworld/raw/master/recs/npm-init.gif)
 
 In my case I have to press Ctrl+C after finishing to stop the process.
 But what is really important is that package.json file is created.
